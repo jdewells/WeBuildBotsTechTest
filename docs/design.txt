@@ -1,0 +1,5 @@
+=== Part 1
+- Parse file once, matching on the way
+- Pomodoro, commit per iteration
+- Possible to use a cursor to progress forward after finding a name?
+- Unit test this shindig
