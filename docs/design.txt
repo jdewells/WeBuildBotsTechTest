@@ -3,3 +3,8 @@
 - Pomodoro, commit per iteration
 - Possible to use a cursor to progress forward after finding a name?
 - Unit test this shindig
+
+>
+- Decouple name finding from representation - returns a map of locations by name?
+- Decided against using a stream (the "cursor" idea from above) as it's too small a file. 
+- Thinking on how humans parse names in text: the first name or the title are "entry point words". They denote a name is coming (or are the whole name, as is the case of "Oliver"). Thinking "assemble entry point words as array, iterate through each word in file and do equality check" as a starting point.
