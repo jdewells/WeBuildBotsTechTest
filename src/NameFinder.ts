@@ -1,17 +1,19 @@
+import NameStruct from "./NameStruct.model";
+
 export = {
     findNames: findNames
 };
 
-function findNames(names: Array<string>, content: string) : Object {
+function findNames(nameStruct: NameStruct, content: string) : Object {
     let resultObj = {};
     
-    names.forEach((name) => {
-        if (content.indexOf(name) != -1) {
-            if (resultObj[name] === undefined) {
-                resultObj[name] = 0;
+    nameStruct.firstNames.forEach((firstname) => {
+        if (content.indexOf(firstname) != -1) {
+            if (resultObj[firstname] === undefined) {
+                resultObj[firstname] = 0;
             }
     
-            resultObj[name]++;
+            resultObj[firstname]++;
         }
     });
 
