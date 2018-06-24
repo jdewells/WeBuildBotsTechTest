@@ -57,28 +57,47 @@ describe('success', () => {
     });
 
     describe('firstname + lastname matching', () => {
-        test.skip('finds a first and lastname match', () => {
+        test('finds a first and lastname match', () => {
             testFindNames(
                 new NameStruct([], ['Percy'], ['Simmons']),
                 'My name is Percy Simmons',
                 { 'Percy Simmons': 1 }
-            )
-        });
-
-        test('does not include firstname alone in results when found with a lastname', () => {
-            
+            );
         });
 
         test('includes firstname and firstname + lastname pair if found in one sentence', () => {
-            
+            testFindNames(
+                new NameStruct([], ['Percy'], ['Simmons']),
+                'My name is Percy Simmons, but my friends call me Percy',
+                { 'Percy Simmons': 1, 'Percy': 1 }
+            );
         });
     });
+
+    describe('title + firstname + lastname matching', () => {
+        test('returns match for title + firstname + lastname', () => {
+            testFindNames(
+                new NameStruct(['Dr'], ['Gregory'], ['Bloke']),
+                'Good evening, I am Dr. Gregory Bloke',
+                { 'Dr Gregory Bloke': 1 }
+            );
+        });
+        test('example from test specification', () => {
+            testFindNames(
+                new NameStruct(['Mr'], ['Oliver', 'James'], ['Twist']),
+                'Oliver Twist, was sometimes known as Oliver, but his full name was Mr. Oliver James Twist. For the sake of ease we will just call him Oliver.',
+                { 'Oliver': 2, 'Oliver Twist': 1, 'Mr Oliver James Twist': 1 }
+            )
+        });
+    });
+
+        
 });
 
 describe('failure', () => {
     test('returns blank object if nothing was found', () => {
         testFindNames(
-            new NameStruct([], ['Fred'], []),
+            new NameStruct(['Mr'], ['Fred'], ['Lagrange']),
             'My name is Bartholomew',
             { }
         );

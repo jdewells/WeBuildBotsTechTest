@@ -15,11 +15,11 @@ function findNamesInWords(words: Array<string>, nameStruct: NameStruct) : Object
     let nameCounter = {};
 
     while (words.length > 0) {
-        console.debug(words);
 
         let firstWord = words[0];
         let secondWord = words[1] || '';
         let thirdWord = words[2] || '';
+        let fourthWord = words[3] || '';
 
         /*
             TECH TALK
@@ -31,10 +31,25 @@ function findNamesInWords(words: Array<string>, nameStruct: NameStruct) : Object
         let firstWordIsAFirstname = nameStruct.firstnames.indexOf(firstWord) >= 0;
         let secondWordIsAFirstname = nameStruct.firstnames.indexOf(secondWord) >= 0;
         let secondWordIsALastname = nameStruct.lastnames.indexOf(secondWord) >= 0;
+        let thirdWordIsAFirstname = nameStruct.firstnames.indexOf(thirdWord) >= 0;
         let thirdWordIsALastname = nameStruct.lastnames.indexOf(thirdWord) >= 0;
+        let fourthWordIsALastName = nameStruct.lastnames.indexOf(fourthWord) >= 0;
+
+        if (firstWordIsATitle && secondWordIsAFirstname && thirdWordIsAFirstname && fourthWordIsALastName) {
+            let fullName = firstWord + ' ' + secondWord + ' ' + thirdWord + ' ' + fourthWord;
+            
+            console.debug('Title + Firstname + Firstname + Lastname detected for ' + fullName);
+            
+            addNameToResults(fullName, nameCounter);
+            words.splice(0, 4);
+            continue;
+        }
 
         if (firstWordIsATitle && secondWordIsAFirstname && thirdWordIsALastname) {
             let fullName = firstWord + ' ' + secondWord + ' ' + thirdWord;
+
+            console.debug('Title + Firstname + Lastname detected for ' + fullName);
+
             addNameToResults(fullName, nameCounter);
             words.splice(0, 3);
             continue;
@@ -42,6 +57,9 @@ function findNamesInWords(words: Array<string>, nameStruct: NameStruct) : Object
 
         if ((firstWordIsAFirstname || firstWordIsATitle) && secondWordIsALastname) {
             let fullName = firstWord + ' ' + secondWord;
+
+            console.debug('Title/Firstname + Lastname detected for ' + fullName);
+
             addNameToResults(fullName, nameCounter);
             words.splice(0, 2);
             continue;
@@ -49,8 +67,14 @@ function findNamesInWords(words: Array<string>, nameStruct: NameStruct) : Object
 
         if (firstWordIsAFirstname) {
             addNameToResults(firstWord, nameCounter);
+
+            console.debug('Firstname detected for ' + firstWord);
+
             words.splice(0, 1);
+            continue;
         }
+
+        words.splice(0, 1);
     }
 
     return nameCounter;
