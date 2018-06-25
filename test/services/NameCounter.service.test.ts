@@ -1,6 +1,6 @@
-import NameStruct from '../src/models/NameStruct.model';
+import NameStruct from '../../src/models/NameStruct.model';
 
-import NameCounter from '../src/NameCounter';
+import NameCounter from '../../src/services/NameCounter.service';
 
 describe('countNamesInLineList', () => {
     function testCountNamesInLineList(nameStruct: NameStruct, lineList: Array<string>, expectedObject: Object): void {

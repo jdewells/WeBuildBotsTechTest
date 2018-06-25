@@ -1,6 +1,6 @@
-import NameStruct from "./models/NameStruct.model";
+import NameStruct from "../models/NameStruct.model";
 
-import TextParser from "./TextParser";
+import TextParser from "./TextParser.service";
 
 export default {
     countNamesInLineList: countNamesInLineList,

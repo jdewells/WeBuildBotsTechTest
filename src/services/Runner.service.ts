@@ -1,9 +1,9 @@
 import _ = require('lodash');
 import fs = require('fs');
 
-import NameStruct from './models/NameStruct.model';
+import NameStruct from '../models/NameStruct.model';
 
-import NameCounter from './NameCounter';
+import NameCounter from './NameCounter.service';
 
 const RESOURCES_DIRECTORY = 'res/'
 const TITLES_PATH = RESOURCES_DIRECTORY + 'titles.txt';
@@ -12,9 +12,18 @@ const LASTNAMES_PATH = RESOURCES_DIRECTORY + 'last-names.txt';
 const TARGET_PATH = RESOURCES_DIRECTORY + 'oliver-twist.txt';
 const OUTPUT_PATH = 'out/output.txt';
 
-run();
+export default {
+    generateNameCountObject: generateNameCountObject,
+    generateNameCountFile: generateNameCountFile
+}
 
-function run() {
+function generateNameCountFile() {
+    let nameCountObject = generateNameCountObject();
+    let sortedNameCountArray = convertToReadableFormat(nameCountObject);
+    writeOutputFile(OUTPUT_PATH, sortedNameCountArray);
+}
+
+function generateNameCountObject() {
     let nameStruct = new NameStruct(
         readFileAsArray(TITLES_PATH, '\n'), 
         readFileAsArray(FIRSTNAMES_PATH, '\r'), 
@@ -22,9 +31,7 @@ function run() {
     );
 
     let targetFileLines = readFileAsArray(TARGET_PATH, '\r');
-    let nameCountObject = NameCounter.countNamesInLineList(nameStruct, targetFileLines);
-    let sortedNameCountArray = convertToReadableFormat(nameCountObject);
-    writeOutputFile(OUTPUT_PATH, sortedNameCountArray);
+    return NameCounter.countNamesInLineList(nameStruct, targetFileLines);
 }
 
 function readFileAsArray(path: string, separator: string) : Array<string> {

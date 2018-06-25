@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var TextParser_1 = require("./TextParser");
+var TextParser_service_1 = require("./TextParser.service");
 exports["default"] = {
     countNamesInLineList: countNamesInLineList,
     countNamesInLine: countNamesInLine
@@ -19,7 +19,7 @@ function countNamesInLineList(nameStruct, lineList) {
     return resultNameCount;
 }
 function countNamesInLine(nameStruct, textLine) {
-    var words = TextParser_1["default"].convert(textLine);
+    var words = TextParser_service_1["default"].convert(textLine);
     return findNamesInWords(words, nameStruct);
 }
 function findNamesInWords(words, nameStruct) {

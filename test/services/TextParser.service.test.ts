@@ -1,4 +1,4 @@
-import TextParser from '../src/TextParser';
+import TextParser from '../../src/services/TextParser.service';
 
 // See NameFinder.test.ts for an explanation of this pattern.
 function testTextParser(text: string, expectedResult: Array<string>) {

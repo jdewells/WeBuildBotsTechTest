@@ -1,7 +1,8 @@
 # Hi!
 
 ## How do I run this nonsense?
-TODO (hilariously)
+Part 1: `tsc src/NameFileGenerator.ts; node src/NameFileGenerator.js` (or `src/NameFileGenerator.ts` if you have it installed)
+Part 2: `tsc src/index.js; node src/index.js` and visit `http://localhost:3000/name-count?name=Oliver` as you would expect.
 
 ## What should I look for when going through this code?
 I've used commit messages as a sort of diary of progress. Definitely worth going through the Git history to see how it was shaped over time.
@@ -13,4 +14,4 @@ I came up with the solution design myself. Normally if given a task like this th
 
 But the last time I did that in an interview they called me out on it. >:|
 
-## How did 
+As mentioned in the Git commit history I now think this was the wrong move, but the damage is done. It's probably possible to use async threads to process the lines with multiple workers or batch the lines by paragraph instead of line, but I'm out of time.
